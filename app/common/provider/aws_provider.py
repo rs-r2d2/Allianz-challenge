@@ -70,7 +70,7 @@ class AWSProvider(ProviderBase):
         :return:
         """
         try:
-            ec2_client = self.boto3.client('ec2')
+            ec2_client = self.boto3.client('ec2', region_name=os.environ['region'])
             regions = [region['RegionName'] for region in ec2_client.describe_regions()['Regions']]
             for region in regions:
                 ec2 = self.boto3.resource('ec2', region_name=region)
